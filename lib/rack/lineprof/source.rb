@@ -1,14 +1,13 @@
 module Rack
   class Lineprof
     class Source
-
       attr_reader :file_name, :raw_samples, :options
 
-      def initialize file_name, raw_samples, options = {}
+      def initialize(file_name, raw_samples, options = {})
         @file_name, @raw_samples, @options = file_name, raw_samples, options
       end
 
-      def format colorize = true
+      def format
         return nil if samples.empty?
 
         formatted = file_name.sub(Dir.pwd + '/', '') + "\n"
@@ -77,7 +76,6 @@ module Rack
           NOMINAL  => 0.2
         }.merge(options.fetch :thresholds, {})
       end
-
     end
   end
 end
